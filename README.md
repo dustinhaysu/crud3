@@ -1,1 +1,2 @@
 # crud3
+This is my third time around following the Zell tutorial: Building a Simple CRUD app with Node, Express, and MongoDB. Please feel free to <a href="https://zellwk.com/blog/crud-express-mongodb/">click here</a> to visit his page.
