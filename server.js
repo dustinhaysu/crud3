@@ -17,6 +17,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true})
         //MIDDLEWARE ************************/
         app.set('view engine', 'ejs')
         app.use(bodyParser.urlencoded({ extended: true }))
+        app.use(express.static('public'))
+        app.use(bodyParser.json()) //PUT main.js
 
 //
 
@@ -38,6 +40,25 @@ app.post('/quotes', (req, res) => {
     quotesCollection.insertOne(req.body)
     .then(result => {
         res.redirect('/')
+    })
+    .catch(error => console.error(error))
+})
+
+// UPDATE *********************/
+
+app.put('/quotes', (req, res) => {
+    quotesCollection.findOneAndUpdate(
+        /*query*/ { name: 'Yoda' },
+        /*update*/ { 
+            $set: {
+            name: req.body.name,
+            quote: req.body.quote
+        }
+        },
+        /*options*/ {upsert: true}
+    )
+    .then(result => {
+        console.log(result)
     })
     .catch(error => console.error(error))
 })
